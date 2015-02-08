@@ -6,7 +6,7 @@
 module Listenable
   def add_listener(listener)
     p listener
-    @listeners = [] unless defined? @listeners
+    @listeners = Array.new unless defined? @listeners
     return false if @listeners.include?(listener)
     @listeners.push(listener)
     return true
