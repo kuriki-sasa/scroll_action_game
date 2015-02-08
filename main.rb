@@ -1,6 +1,7 @@
 require "starruby"
 require_relative 'key_event_dispatcher'
 require_relative 'key_input_observer'
+require_relative 'view'
 
 include StarRuby
 
@@ -35,9 +36,8 @@ KeyEventDispatcher.instance.add_listener(test_listener)
 Game.run(640, 480) do |game|
   game.screen.clear
   KeyInputObserver.instance.check_key_input
-  num1 = Test.new(1)
-  num2 = Test.new(2)
-  num3 = Test.new(1)
-  p "num1 == num2" if num1 == num2
-  p "num1 == num3" if num1 == num3
+  view = View.new(50, 50)
+  sub_view = View.new(10, 10, Color.new(0, 0, 0))
+  view.add_sub_view(sub_view)
+  view.render(game.screen)
 end
