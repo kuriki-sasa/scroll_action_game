@@ -12,9 +12,9 @@ class KeyEventDispatcher
   def dispatch_key_event(action, key)
     func = nil
     case action
-    when :press  then func = :did_pressed_key
+    when :press   then func = :did_pressed_key
     when :release then func = :did_released_key
-    when :tap    then func = :did_tapped_key
+    when :tap     then func = :did_tapped_key
     else
       raise "Unkonow action! action : #{action}  key : #{key}"
     end
