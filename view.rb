@@ -1,42 +1,108 @@
 require_relative 'coordinate.rb'
 
 class View
-  def initialize(width, height, backgroud_color = Color.new(255, 255, 255), alpha = 255)
-    @texture = init_texture(width, height, backgroud_color)
-    @sub_views = Array.new
-    @alpha = alpha
+  attr_reader :width, :height
+
+  def initialize(width, height, attributes = {})
+    @width = width
+    @height = height
+    @attributes = attributes
+
+    @texture = initialize_texture(width, height, attributes)
+    @subviews = Array.new
     @origin = Coordinate.new(0, 0)
   end
 
   def render(parent_texture)
-    render_sub_views
+    render_subviews
     parent_texture.render_texture(@texture, @origin.x, @origin.y, options)
   end
 
-  def add_sub_view(view)
-    @sub_views = Array.new unless defined? @sub_views
-    @sub_views.push(view)
+  def add_subview(view)
+    @subviews.push(view)
+    layout_subviews
   end
 
-  def layout_sub_views
-    @sub_views.each do |sub_view|
+  def remove_subview(view)
+    @subviews.delete(view)
+    layout_subviews
+  end
+
+  def layout_subviews
+  end
+
+  def render_subviews
+    return if @subviews.empty?
+    @subviews.each do |subview|
+      subview.render(@texture)
     end
   end
 
-  def render_sub_views
-    @sub_views.each do |sub_view|
-      sub_view.render(@texture)
-    end
+  protected
+  def set_origin(origin)
+    @origin = origin
+  end
+
+  def margin
+    return @attributes.fetch(:margin, {:margin_top => margin_top, :margin_bottom => margin_bottom, :margin_left => margin_left, :margin_right => margin_right})
+  end
+
+  def margin_top
+    return @attributes.fetch(:margin_top, 0)
+  end
+
+  def margin_bottom
+    return @attributes.fetch(:margin_bottom, 0)
+  end
+
+  def margin_left
+    return @attributes.fetch(:margin_left, 0)
+  end
+
+  def margin_right
+    return @attributes.fetch(:margin_right, 0)
   end
 
   private
-  def init_texture(width, height, backgroud_color)
+  def initialize_texture(width, height, attributes={})
     texture = Texture.new(width, height)
-    texture.fill(backgroud_color)
+    texture.fill(attributes.fetch(:backgroud_color, Color.black))
     return texture
   end
 
+  def tag
+    return @attributes.fetch(:tag, nil)
+  end
+
+  def alpha
+    return @attributes.fetch(:alpha, 255)
+  end
+
+  def gravity
+    return @attributes.fetch(:gravity, [:top, :left])
+  end
+
   def options
-    return {:alpha => @alpha}
+    return {:alpha => alpha}
+  end
+
+  def padding
+    return @attributes.fetch(:padding, {:padding_top => padding_top, :padding_bottom => padding_bottom, :padding_left => padding_left, :padding_right => padding_right})
+  end
+
+  def padding_top
+    return @attributes.fetch(:padding_top, 0)
+  end
+
+  def padding_bottom
+    return @attributes.fetch(:padding_bottom, 0)
+  end
+
+  def padding_right
+    return @attributes.fetch(:padding_right, 0)
+  end
+
+  def padding_left
+    return @attributes.fetch(:padding_left, 0)
   end
 end
