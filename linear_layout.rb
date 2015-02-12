@@ -15,7 +15,7 @@ class LinearLayout < Layout
   def layout_subviews_horizontally
     return if @subviews.empty?
     origin_x = padding_left
-    origin_y = origin_y_of_subview_in_horizontal_layout
+    origin_y = origin_y_of_subview_in_horizontal_layout + padding_top
     @subviews.each do |subview|
       subview.set_origin(Coordinate.new(origin_x, origin_y))
       origin_x = origin_x + (subview.margin_left + subview.width + subview.margin_right)
@@ -24,7 +24,7 @@ class LinearLayout < Layout
 
   def layout_subviews_vertically
     return if @subviews.empty?
-    origin_x = origin_x_of_subview_in_vertical_layout
+    origin_x = origin_x_of_subview_in_vertical_layout + padding_left
     origin_y = padding_top
     @subviews.each do |subview|
       subview.set_origin(Coordinate.new(origin_x, origin_y))
