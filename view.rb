@@ -15,7 +15,7 @@ class View
 
   def render(parent_texture)
     render_subviews
-    parent_texture.render_texture(@texture, @origin.x, @origin.y, options)
+    parent_texture.render_texture(@texture, @origin.x, @origin.y, render_options)
   end
 
   def add_subview(view)
@@ -70,20 +70,16 @@ class View
     return texture
   end
 
+  def render_options
+    return {:alpha => alpha}
+  end
+
   def tag
     return @attributes.fetch(:tag, nil)
   end
 
   def alpha
     return @attributes.fetch(:alpha, 255)
-  end
-
-  def gravity
-    return @attributes.fetch(:gravity, [:top, :left])
-  end
-
-  def options
-    return {:alpha => alpha}
   end
 
   def padding

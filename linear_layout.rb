@@ -55,4 +55,8 @@ class LinearLayout < Layout
   def orientation
     return @attributes.fetch(:orientation, :vertical)
   end
+
+  def gravity
+    return @attributes.fetch(:gravity, [:top, :left])
+  end
 end
