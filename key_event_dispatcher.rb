@@ -22,7 +22,7 @@ class KeyEventDispatcher
   end
 end
 
-class KeyEventListener
+module KeyEventListener
   def did_pressed_key(key_code)
   end
 
