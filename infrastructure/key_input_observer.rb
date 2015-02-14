@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
+
 require 'singleton'
-require_relative 'key_event_dispatcher'
+
+require 'infrastructure/key_event_dispatcher'
 
 class KeyInputObserver
   include Singleton

@@ -3,7 +3,8 @@
 #################################################
 
 require 'singleton'
-require_relative 'listenable'
+
+require 'util/listenable'
 
 class KeyEventDispatcher
   include Singleton

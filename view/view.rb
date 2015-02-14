@@ -1,4 +1,4 @@
-require_relative 'coordinate.rb'
+require 'common/coordinate.rb'
 
 class View
   attr_reader :width, :height

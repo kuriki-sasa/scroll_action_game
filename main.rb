@@ -1,10 +1,12 @@
-require "starruby"
-require_relative 'key_event_dispatcher'
-require_relative 'key_input_observer'
-require_relative 'view'
-require_relative 'view_attributes'
-require_relative 'linear_layout'
-require_relative 'color'
+$LOAD_PATH << __dir__
+
+require 'starruby'
+
+require 'infrastructure/key_event_dispatcher'
+require 'infrastructure/key_input_observer'
+require 'infrastructure/color'
+require 'view/view'
+require 'view/linear_layout'
 
 include StarRuby
 

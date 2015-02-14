@@ -1,5 +1,5 @@
-require_relative 'layout'
-require_relative 'coordinate'
+require 'view/layout'
+require 'common/coordinate'
 
 class LinearLayout < Layout
   def layout_subviews
